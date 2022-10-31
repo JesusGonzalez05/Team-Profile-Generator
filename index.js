@@ -11,6 +11,7 @@ const pageTemplate = require('./src/page-template');
 
 // answer to questions 
 const newStaffMember = [];
+
 //prompt questions via inquirer
 //prompt manager questions
 const managerQuestions = [
@@ -23,7 +24,7 @@ const managerQuestions = [
       type: 'input',
       name: 'managerId',
       message: 'What is the team managers id?',
-      },
+    },
     {
       type: 'input',
       name: 'managerEmail',
@@ -70,6 +71,30 @@ const engineerQuestions = [
     },
 ]
 
+// prompt intern questions
+const internQuestions = [
+    {
+      type: 'input',
+      message: 'What is the interns name?',
+      name: 'internName',
+    },  
+    {
+      type: 'input',
+      message: 'What is the interns ID number?',
+      name: 'internId',
+    }, 
+    {
+      type: 'input',
+      message: 'What is the interns email?',
+      name: 'internEmail',
+    }, 
+    {
+      type: 'input',
+      message: 'Where does the intern study?',
+      name: 'internSchool',
+    },
+]
+
 //create manager function
 function createManager() {
   inquirer.prompt(managerQuestions)
@@ -89,11 +114,14 @@ function menuQuestions() {
   inquirer.prompt(typeOfEmployee)
   .then(function(userChoice) {
     if (userChoice.menu === 'add an engineer') {
+    //calls createEngineer function
       createEngineer();
     } else if (userChoice.menu === 'add an intern'){
-     //prompt intern questions
+    //calls createIntern function
+      createIntern();
     } else {
-    // build team function
+    // calls createTeam function
+    createTeam();
     }
     });
 };
@@ -113,15 +141,25 @@ function createEngineer() {
     });
 };
 
-
-
-//if the manager wants to add an employee 
-if (answers.position === 'Create an employee.'){
-
-} else if (questions.position === 'Create an intern.'){
-
-} else if (questions.position === 'Finish building my team!') {
-
+// create intern function
+function createIntern() {
+    inquirer.prompt(internQuestions)
+    .then(function(answers) {
+        const intern = new Intern(
+          answers.internName, 
+          answers.internId, 
+          answers.internEmail, 
+          answers.internSchool
+        );
+        newStaffMember.push(intern);
+        menuQuestions();
+    });
 };
 
-  createManager();
+// creates team function
+function createTeam() {
+    const fileName = 'team';
+    fs.writeFileSync(`./dist/${fileName}.html`, generateSite(teamMembers), 'utf-8');
+}
+
+createManager();
