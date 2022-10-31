@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "inquirer": "^8.2.5"
+  },
+  "name": "team-profile-generator",
+  "description": "This repo is a team profile generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JesusGonzalez05/Team-Profile-Generator.git"
+  },
+  "keywords": [
+    "team-profile-generator"
+  ],
+  "author": "Jesus Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesusGonzalez05/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/JesusGonzalez05/Team-Profile-Generator#readme"
+}
